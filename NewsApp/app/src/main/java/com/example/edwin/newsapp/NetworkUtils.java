@@ -18,7 +18,7 @@ public class NetworkUtils {
             "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest";
 
     final static String PARAM_KEY = "apiKey";
-    final static String KEY = "025d569e3beb4c39bbbbfc31457b2538";
+    final static String KEY = "INSERT_API_KEY";
 
     public static URL buildUrl() {
         Uri builtUri = Uri.parse(NEWSAPI_BASE_URL).buildUpon()
