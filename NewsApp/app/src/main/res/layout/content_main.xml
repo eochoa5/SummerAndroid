@@ -15,17 +15,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
 
-    <ScrollView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:id="@+id/textView"
-        android:layout_height="wrap_content"
-        android:text="" />
-
-    </ScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
 

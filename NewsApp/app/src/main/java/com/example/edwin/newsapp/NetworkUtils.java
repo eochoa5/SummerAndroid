@@ -2,11 +2,18 @@ package com.example.edwin.newsapp;
 
 import android.net.Uri;
 
+import com.example.edwin.newsapp.Models.NewsItem;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,7 +25,7 @@ public class NetworkUtils {
             "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest";
 
     final static String PARAM_KEY = "apiKey";
-    final static String KEY = "025d569e3beb4c39bbbbfc31457b2538";
+    final static String KEY = "INSERT_API_KEY";
 
     public static URL buildUrl() {
         Uri builtUri = Uri.parse(NEWSAPI_BASE_URL).buildUpon()
@@ -53,5 +60,30 @@ public class NetworkUtils {
         } finally {
             urlConnection.disconnect();
         }
+    }
+
+    public static ArrayList<NewsItem> parseJSON(String json) throws JSONException {
+
+        ArrayList<NewsItem> results = new ArrayList<>();
+        JSONObject resultsJson = new JSONObject(json);
+        JSONArray arrayOfArticles = resultsJson.getJSONArray("articles");
+
+        for(int i = 0; i < arrayOfArticles.length(); i++){
+
+            JSONObject item = arrayOfArticles.getJSONObject(i);
+            String title = item.getString("title");
+            String author = item.getString("author");
+            String description = item.getString("description");
+            String publishedAt = item.getString("publishedAt");
+            String url = item.getString("url");
+
+            NewsItem ni = new NewsItem(title, author, description, publishedAt, url);
+
+            results.add(ni);
+
+        }
+
+        return results;
+
     }
 }
